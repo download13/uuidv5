@@ -1,7 +1,7 @@
 var assert = require('assert');
 var uuidv5 = require('./uuid');
 
-
+// TODO: Tests for the translation functions too
 describe('UUIDv5', function() {
 	it('makes DNS uuids', function() {
 		var r = uuidv5('dns', 'www.example.org');
@@ -25,5 +25,12 @@ describe('UUIDv5', function() {
 		var r = uuidv5('oid', 'uid=user,ou=people,dc=example,dc=com');
 
 		assert.equal(r, '075749ab-61eb-54ec-807d-863ebd6f271a');
+	});
+
+	it('can return a Buffer', function() {
+		var r = uuidv5('url', 'http://example.org/page', true);
+		var compare = uuidv5.uuidFromString('6b19973b-8154-5782-bca0-15e6b730ca00');
+
+		assert.deepEqual(r.toJSON(), compare.toJSON());
 	});
 });
