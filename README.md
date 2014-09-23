@@ -14,17 +14,17 @@ If you are unfamiliar with v5 UUIDs, read [this](http://en.wikipedia.org/wiki/Un
 
 ## API
 
-### createUUIDv5(<namespace>, <name>, [raw_output])
+### createUUIDv5(namespace, name, [raw_output])
 
 * `namespace` can be 'url', 'dns', 'oid', or 'x500'. If it's none of those, it must be a UUID to use as a namespace, either in string or Buffer form.
 * `name` can be a string or Buffer. What it should contain is namespace-dependent.
 * `raw_output` is an optional flag. If set to `true`, the UUID will be returned as a Buffer instead of as a string.
 
-### createUUIDv5.uuidToString(<uuid>)
+### createUUIDv5.uuidToString(uuid)
 
 Takes a Buffer-form uuid and returns it as a string.
 
-### createUUIDv5.uuidFromString(<uuidStr>)
+### createUUIDv5.uuidFromString(uuidStr)
 
 Takes a UUID as a string (with or without dashes [-]) and returns it as a Buffer.
 
