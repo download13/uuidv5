@@ -91,6 +91,7 @@ function createUUIDv5(namespace, name, binary) {
 			break;
 
 		case 'null':
+		case null:
 			namespace = NAMESPACE_NULL;
 			break;
 
