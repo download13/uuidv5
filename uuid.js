@@ -7,7 +7,7 @@ var NAMESPACE_OID = uuidFromString('6ba7b812-9dad-11d1-80b4-00c04fd430c8');
 var NAMESPACE_X500 = uuidFromString('6ba7b814-9dad-11d1-80b4-00c04fd430c8');
 var NAMESPACE_NULL = uuidFromString('00000000-0000-0000-0000-000000000000');
 
-// TODO: Add named default namespaces
+
 function createUUIDv5Binary(namespace, name) {
 	var c = Buffer.concat([namespace, name], namespace.length + name.length);
 
@@ -73,7 +73,7 @@ function uuidFromString(uuid) {
 
 function createUUIDv5(namespace, name, binary) {
 	if(!Buffer.isBuffer(namespace)) {
-		switch(namespace) { // Default namespaces
+		switch(namespace.toLowerCase()) { // Default namespaces
 		case 'dns':
 			namespace = NAMESPACE_DNS;
 			break;

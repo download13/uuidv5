@@ -16,7 +16,7 @@ If you are unfamiliar with v5 UUIDs, read [this](http://en.wikipedia.org/wiki/Un
 
 ### uuidv5(namespace, name, [raw_output])
 
-* `namespace` can be 'url', 'dns', 'oid', or 'x500'. If it's none of those, it must be a UUID to use as a namespace, either in string or Buffer form.
+* `namespace` can be 'url', 'dns', 'oid', 'x500', or 'null'. If it's none of those, it must be a UUID to use as a namespace, either in string or Buffer form.
 * `name` can be a string or Buffer. What it should contain is namespace-dependent.
 * `raw_output` is an optional flag. If set to `true`, the UUID will be returned as a Buffer instead of as a string.
 
