@@ -1,8 +1,20 @@
 var assert = require('assert');
 var uuidv5 = require('./uuid');
 
-// TODO: Tests for the translation functions too
+
 describe('UUIDv5', function() {
+	it('converts strings to uuids', () => {
+		const bin = uuidv5.uuidFromString('74738ff5-5367-5958-9aee-98fffdcd1876');
+
+		assert(bin.equals(Buffer.from('74738ff5536759589aee98fffdcd1876', 'hex')));
+	});
+
+	it('converts uuids to strings', () => {
+		const str = uuidv5.uuidToString(uuidv5.uuidFromString('74738ff5-5367-5958-9aee-98fffdcd1876'));
+
+		assert.equal(str, '74738ff5-5367-5958-9aee-98fffdcd1876');
+	});
+
 	it('makes DNS uuids', function() {
 		var r = uuidv5('dns', 'www.example.org');
 
