@@ -71,34 +71,35 @@ function uuidFromString(uuid) {
 	return new Buffer(octets);
 }
 
-function createUUIDv5(namespace, name, binary) {
+function getNamespace(namespace) {
 	if(!Buffer.isBuffer(namespace)) {
 		switch(namespace.toLowerCase()) { // Default namespaces
 		case 'dns':
-			namespace = NAMESPACE_DNS;
-			break;
+			return NAMESPACE_DNS;
 
 		case 'url':
-			namespace = NAMESPACE_URL;
-			break;
+			return NAMESPACE_URL;
 
 		case 'oid':
-			namespace = NAMESPACE_OID;
-			break;
+			return NAMESPACE_OID;
 
 		case 'x500':
-			namespace = NAMESPACE_X500;
-			break;
+			return NAMESPACE_X500;
 
 		case 'null':
 		case null:
-			namespace = NAMESPACE_NULL;
-			break;
+			return NAMESPACE_NULL;
 
 		default:
-			namespace = uuidFromString(namespace);
+			return uuidFromString(namespace);
 		}
 	}
+
+	return namespace;
+}
+
+function createUUIDv5(namespace, name, binary) {
+	namespace = getNamespace(namespace);
 
 	if(!Buffer.isBuffer(name)) {
 		name = new Buffer(name, 'utf8');
