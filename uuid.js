@@ -38,18 +38,32 @@ function uuidToString(uuid) {
 	let raw = '';
 
 	for(let i = 0; i < 16; i++) {
-		let n = uuid[i].toString(16);
-		if(n.length < 2) n = '0' + n;
-		raw += n;
+		raw += byteToHex(uuid[i]).toString(16);
 	}
 
-	const r = raw.substr(0, 8)
-		+ '-' + raw.substr(8, 4)
-		+ '-' + raw.substr(12, 4)
-		+ '-' + raw.substr(16, 4)
-		+ '-' + raw.substr(20);
+	return formatUUIDString(raw);
+}
 
-	return r.toLowerCase();
+function byteToHex(n) {
+	const str = n.toString(16);
+
+	if(str.length === 1) {
+		return '0' + str;
+	}
+
+	return str;
+}
+
+function formatUUIDString(uuidStr) {
+	const segments = [
+		uuidStr.substr(0, 8),
+		uuidStr.substr(8, 4),
+		uuidStr.substr(12, 4),
+		uuidStr.substr(16, 4),
+		uuidStr.substr(20)
+	];
+
+	return segments.join('-').toLowerCase();
 }
 
 function uuidFromString(uuid) {
