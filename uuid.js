@@ -1,18 +1,18 @@
-var crypto = require('crypto');
+const crypto = require('crypto');
 
 
-var NAMESPACE_DNS = uuidFromString('6ba7b810-9dad-11d1-80b4-00c04fd430c8');
-var NAMESPACE_URL = uuidFromString('6ba7b811-9dad-11d1-80b4-00c04fd430c8');
-var NAMESPACE_OID = uuidFromString('6ba7b812-9dad-11d1-80b4-00c04fd430c8');
-var NAMESPACE_X500 = uuidFromString('6ba7b814-9dad-11d1-80b4-00c04fd430c8');
-var NAMESPACE_NULL = uuidFromString('00000000-0000-0000-0000-000000000000');
+const NAMESPACE_DNS = uuidFromString('6ba7b810-9dad-11d1-80b4-00c04fd430c8');
+const NAMESPACE_URL = uuidFromString('6ba7b811-9dad-11d1-80b4-00c04fd430c8');
+const NAMESPACE_OID = uuidFromString('6ba7b812-9dad-11d1-80b4-00c04fd430c8');
+const NAMESPACE_X500 = uuidFromString('6ba7b814-9dad-11d1-80b4-00c04fd430c8');
+const NAMESPACE_NULL = uuidFromString('00000000-0000-0000-0000-000000000000');
 
 
 function createUUIDv5Binary(namespace, name) {
-	var c = Buffer.concat([namespace, name], namespace.length + name.length);
+	const c = Buffer.concat([namespace, name], namespace.length + name.length);
 
-	var digest = crypto.createHash('sha1').update(c).digest();
-	var uuid = new Buffer(16);
+	const digest = crypto.createHash('sha1').update(c).digest();
+	const uuid = new Buffer(16);
 
 	// bbbb - bb - bb - bb - bbbbbb
 	digest.copy(uuid, 0, 0, 4); // time_low
@@ -35,15 +35,15 @@ function uuidToString(uuid) {
 		throw new Error('uuid buffer length must be 16');
 	}
 
-	var raw = '';
+	let raw = '';
 
-	for(var i = 0; i < 16; i++) {
-		var n = uuid[i].toString(16);
+	for(let i = 0; i < 16; i++) {
+		let n = uuid[i].toString(16);
 		if(n.length < 2) n = '0' + n;
 		raw += n;
 	}
 
-	var r = raw.substr(0, 8)
+	const r = raw.substr(0, 8)
 		+ '-' + raw.substr(8, 4)
 		+ '-' + raw.substr(12, 4)
 		+ '-' + raw.substr(16, 4)
@@ -57,14 +57,14 @@ function uuidFromString(uuid) {
 		throw new Error('uuid must be a string');
 	}
 
-	var raw = uuid.replace(/-/g, '');
+	const raw = uuid.replace(/-/g, '');
 	if(raw.length !== 32) {
 		throw new Error('uuid string length must be 32 with -\'s removed');
 	}
 
-	var octets = [];
+	const octets = [];
 
-	for(var i = 0; i < 16; i++) {
+	for(let i = 0; i < 16; i++) {
 		octets[i] = parseInt(raw.substr(i * 2, 2), 16);
 	}
 
@@ -105,7 +105,7 @@ function createUUIDv5(namespace, name, binary) {
 		name = new Buffer(name, 'utf8');
 	}
 
-	var uuid = createUUIDv5Binary(namespace, name);
+	let uuid = createUUIDv5Binary(namespace, name);
 	if(!binary) {
 		uuid = uuidToString(uuid);
 	}
