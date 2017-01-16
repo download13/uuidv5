@@ -1,6 +1,6 @@
 {
   "name": "uuidv5",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Generates named version 5 UUIDs",
   "main": "uuid.js",
   "scripts": {
